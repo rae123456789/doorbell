@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang ='en'>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <h2 class = 'has-text-danger is-size-4'>Join groups here</h2>
+        
+        
+    </head>
+    <body>
+        <nav class="breadcrumb" aria-label="breadcrumbs" >
+            <ul>
+              <li><a class = has-text-warning href="">Doorbell</a></li>
+              <li><a class = has-text-warning href="doorbell:">Login</a></li>
+              <li><a class = has-text-warning href="{% url 'doorbell:home' %}">Home</a></li>
+              <li class="is-active"><a class = has-text-danger href="{% url 'doorbell:join' %}" aria-current="page">Join Groups</a></li>
+              
+            </ul>
+        </nav>
+        {% for group in groups %}
+            {% if userprofile not in group.userprofile_set.all %}
+
+
+                <div class="tile is-2">
+                    <div class="tile is-child box has-background-warning">                           
+                        <p class="title"><a class = has-text-white href="{% url 'doorbell:group' group.group %}">{{group.group}}</a></p>
+                        <p ><a class = has-text-danger href="{% url 'doorbell:joingroup' group.group %}">Join</a></p>
+            
+                    </div>
+            
+
+                </div>
+                <div class = 'block'></div>  
+            {% endif %}
+        {% endfor %}
+    </body>
+</html>

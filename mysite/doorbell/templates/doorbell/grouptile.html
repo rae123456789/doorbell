@@ -1,0 +1,39 @@
+<div class="tile">
+    <div class="tile is-parent">
+        <div class="tile is-child has-background-warning box">
+            <p class="title has-text-danger"><a class = has-text-white href="{% url 'doorbell:group' group.group %}">{{group.group}}</a></p>
+
+
+
+                    <div class="dropdown is-hoverable">
+                    <div class="dropdown-trigger">
+                        <button class="button has-background-danger-light" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span class = 'has-text-danger'>Quick Send</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-down has-text-danger" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                        <div class = 'item'>
+
+                            <form action= "{% url 'doorbell:post' group.group %}" method = 'post' class="has-background-white-bis">
+                                {% csrf_token %}
+                                <textarea class="textarea is-danger has-text-danger has-background-white-bis" name = 'post' value = 'post' type = 'text' placeholder="e.g. Hello world"></textarea>
+                                <p><input class = 'button has-background-danger-light has-text-danger' type = 'submit'></p>
+                            </form>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+        </div>
+    </div>
+
+
+</div>

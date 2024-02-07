@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <title>Vote here</title>
+</head>
+<body>
+
+    {% if q %}
+        <h3>{{q.question_text}}</h3>
+        
+        <form action="{% url 'vote' q.id %}" method="POST">
+            {% csrf_token %}
+            <input type ="text" name='textbox' id='helloid'>
+            
+            {% for choice in choices %}
+                <p>
+                    <input type="radio" id="choice{{choice.id}}" name="choice" value="{{choice.id}}">
+                    <label for="choice{{choice.id}}">{{choice.choice_text}}</label>
+                </p>
+               
+                
+            {% endfor %}
+            <input type="submit" value="Vote">
+        </form>
+    {% endif %}
+
+    
+
+</body>
+</hmtl> 
+
+

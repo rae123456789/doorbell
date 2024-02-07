@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="'en">
+<head>
+
+</head>
+<body>
+    <h1>{{q.question_text}}</h1>
+    <ul>
+        {% for choice in q.choice_set.all %}
+            <li><a>{{ choice.choice_text }} - {{choice.votes}}</a></li>
+        {% endfor %}
+
+    </ul>
+    
+</body>
+</html>

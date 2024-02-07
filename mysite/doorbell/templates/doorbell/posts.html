@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/28a5e65079.js" crossorigin="anonymous"></script>
+</head>
+{% if posts %}
+<ul>
+{% for po in posts %}
+    
+    <aritcle class ='media'>
+        <div class ='media-content'>
+            <div class ='content'>
+                <p>
+                    <li>
+                        <strong>{{po.author}}</strong> <small>{{po.pub_date}}</small>
+                        <br>
+                        {{po.post_text}}
+                    </li>
+                </p>
+            </div>
+            {% if request.user in po.likers.all %}
+                <span class="icon">
+                <a href="{% url 'doorbell:unlike' po.id %}"><i style="color: red;" class="fas fa-heart"></i></a>
+                </span>
+
+            {% else %}
+                <span class="'icon">
+                <a href="{% url 'doorbell:like' po.id %}"><i style="color: red;" class="far fa-heart"></i></a>
+                </span>
+            {% endif %}
+
+            {% if request.user == po.author %}
+                <a href="{% url 'doorbell:delete' po.id %}"><button class="delete is-warning"></button></a>
+            {% endif %}
+
+            <form action= "{% url 'doorbell:post' group.group %}" method = 'post'>
+                {% csrf_token %}
+
+                <div class = 'block'></div>
+                <textarea class="textarea is-danger is-small is-rounded has-text-danger has-background-white-bis" rows = '2' cols = '5' type="text" name = 'reply' placeholder = 'Reply'></textarea>
+                <div class = 'block'></div>
+                <button class = 'button has-background-danger-light has-text-danger'  type = 'submit'>Post</button>
+            </form>
+        </div>
+    </aritcle>
+    
+
+
+    
+
+
+
+
+{% endfor %}
+</ul>
+{% else %} 
+<p>No posts are available.</p>
+{% endif %}

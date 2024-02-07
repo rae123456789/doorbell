@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <script src="https://kit.fontawesome.com/28a5e65079.js" crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    
+        <section class="hero is-small is-danger is-light">
+            <div class="hero-body">
+                <p class="title">
+                <h1 class='title'>Welcome to {{userprofile.borough}} Polls</h1>
+                
+                </p>
+            </div>
+        </section>
+        
+        
+    </head>
+
+    <body>
+        <form action="{% url 'create_poll' %}" method="POST">
+            {% csrf_token %}
+            <div class="field">
+                <label class="label" for="question">Create a question for your poll</label>
+                <div class="control">
+                    <input class="input" id="question" name="question" type="text" placeholder="e.g. how are you?">
+                </div>
+            </div>
+            <label class="label">Create choices for your poll</label>
+
+            {% for i in '01234'|make_list %}
+                <div class="field">
+                    <label id="choice{{forloop.counter}}" class="label">Choice {{forloop.counter}}</label>
+                    <div class="control">
+                        <input class="input" name="choice{{forloop.counter}}" id=name="choice{{forloop.counter}}" type="text" placeholder="e.g. I am good">
+                    </div>
+                </div>
+            {% endfor %}
+
+            <input class="button" type="submit" value="Create Poll">
+
+
+        </form>
+
+        {% include 'doorbell/polltext.html' %}
+
+    
+    </body>
+
+
+
+
+
+
+</html>

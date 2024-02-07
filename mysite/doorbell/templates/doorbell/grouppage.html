@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+
+    </head>
+    <body>
+    
+        <section class="hero is-small is-danger is-light">
+            <div class="hero-body">
+                <p class="title">
+                <h1 class='title'>{{group.group}}</h1>
+                <h2 class = 'subtitle'>Welcome {{request.user.username}}</h2>
+                </p>
+            </div>
+        </section>
+
+        
+        
+
+        {% if userprofile in group.userprofile_set.all %}
+
+            <nav class="breadcrumb" aria-label="breadcrumbs" >
+                <ul>
+                    <li><a class = has-text-warning href="">Doorbell</a></li>
+                    <li><a class = has-text-warning href="doorbell:">Login</a></li>
+                    <li><a class = has-text-warning href="{% url 'doorbell:home' %}">Home</a></li>
+                    <li class="is-active"><a class = has-text-danger href="{% url 'doorbell:post' group.group %}" aria-current="page">{{group.group}}</a></li>
+              
+                </ul>
+            </nav>
+
+           
+
+            
+                
+            
+                <form action="{% url 'doorbell:search_posts' %}" method='GET'>
+                    <input class="input is-danger is-rounded has-text-danger has-background-white-bis" type="text" name = 'search_post' placeholder="Search Posts">
+                    <div class = 'block'></div>
+                        <button class = ' button has-background-danger-light has-text-danger' type="submit">Search Posts</button>                        
+                </form>
+                
+
+            
+                   
+            <form action= "{% url 'doorbell:post' group.group %}" method = 'post'>
+                {% csrf_token %}
+
+                <div class = 'block'></div>
+                <textarea class="textarea is-danger is-small is-rounded has-text-danger has-background-white-bis" type="text" name = 'post' placeholder = 'Post'></textarea>
+                <div class = 'block'></div>
+                <button class = 'button has-background-danger-light has-text-danger'  type = 'submit'>Post</button>
+            </form>
+
+            {% include 'doorbell/posts.html' %}
+
+      
+        
+        {% else %}
+            <p><a href="{% url 'doorbell:joingroup' group.group %}">Join</a></p>
+            
+        {% endif %}
+
+       
+        
+    
+
+
+        
+
+    
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/28a5e65079.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <section class="hero is-small is-danger is-light">
+        <div class="hero-body">
+            <p class="title">
+            <h1 class='title'>Welcome to {{userprofile.borough}} Borough</h1>
+            <h2 class = 'subtitle'><a  href= "{% url 'doorbell:join' %}"> Join groups here</a></h2>
+            </p><a href="{% url 'doorbell:polls'  %}">create a poll</a>
+        </div>
+    </section>
+    
+    
+    {% load my_tags %}
+
+</head>
+<body> 
+    <nav class="breadcrumb" aria-label="breadcrumbs" >
+        <ul>
+          <li><a class = has-text-warning href="">Doorbell</a></li>
+          <li><a class = has-text-warning href="{% url 'doorbell:login' %}">Login</a></li>
+          <li class="is-active"><a class = has-text-danger href="{% url 'doorbell:home' %}" aria-current="page">Home</a></li>
+          
+        </ul>
+      </nav>
+    <div class = 'block'>
+        <h1 class = 'has-text-danger is-size-3'>My Groups</h1>
+    </div>
+   
+    
+       
+        
+    <div class="columns">
+            <div class="column">
+                {% for group in groups %}
+                {% if userprofile in group.userprofile_set.all %}
+                    {% if forloop.counter|mod:3 == 1 %}
+                        {% include 'doorbell/grouptile.html' %}
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="column">
+                {% for group in groups %}
+                {% if userprofile in group.userprofile_set.all %}
+                    {% if forloop.counter|mod:3 == 2 %}
+                        {% include 'doorbell/grouptile.html' %}
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="column">
+                {% for group in groups %}
+                {% if userprofile in group.userprofile_set.all %}
+                    {% if forloop.counter|mod:3 == 0 %}
+                        {% include 'doorbell/grouptile.html' %}
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        
+        
+        
+        
+        
+    </div>
+    
+
+
+            
+        
+</body>
+</html>
