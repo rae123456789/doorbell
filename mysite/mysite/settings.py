@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['doorbellrae.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'twitter.apps.TwitterConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
